@@ -1,26 +1,33 @@
 Summary:	SynCE - Synchronization engine
+Summary(pl.UTF-8):	SynCE - silnik synchronizacji
 Name:		synce-sync-engine
 Version:	0.10.0
 Release:	0.1
-License:	MIT
+License:	GPL v2+
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/synce/%{name}-%{version}.tar.gz
 # Source0-md5:	aa70ab8804c0d981e84963010852d3c5
 URL:		http://www.synce.org/
-BuildRequires:	libopensync-plugin-python >= 0.21
-BuildRequires:	libxml2
-BuildRequires:	libxslt
-BuildRequires:	python-dbus
-BuildRequires:	python-pygobject
-#BuildRequires:	python-pyxml
+BuildRequires:	python
+BuildRequires:	rpm-pythonprov
 BuildRequires:	sed >= 4.0
-BuildRequires:	synce-librtfcomp-devel >= 1.1
-BuildRequires:	synce-odccm >= 0.10.0
-BuildRequires:	synce-pywbxml-devel >= 0.1
-BuildRequires:	synce-rra >= 0.10.0
+Requires:	libopensync-plugin-python >= 0.21
+Requires:	python-dbus
+Requires:	python-libxml2
+Requires:	python-libxslt
+Requires:	python-pygobject
+Requires:	python-pyrapi2 >= 0.10.0
+Requires:	python-pyrra >= 0.10.0
+Requires:	python-pyrtfcomp >= 1.1
+Requires:	synce-odccm >= 0.10.0
+Requires:	synce-pywbxml >= 0.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
+SynCE - Synchronization engine.
+
+%description -l pl.UTF-8
+SynCE - silnik synchronizacji.
 
 %prep
 %setup -q
@@ -38,6 +45,9 @@ cp -a config.xml $RPM_BUILD_ROOT%{_datadir}/%{name}
 cp -a tests $RPM_BUILD_ROOT%{_datadir}/%{name}
 cp -a opensync-plugin.py $RPM_BUILD_ROOT%{_libdir}/%{name}/python-plugins/synce.py
 
+%py_comp $RPM_BUILD_ROOT%{py_sitedir}
+%py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -53,5 +63,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/sync-engine
 %{_datadir}/synce-sync-engine
 %{_libdir}/synce-sync-engine
-%{py_sitedir}/*.py
+%{py_sitedir}/*.py[co]
 %{py_sitedir}/formats
