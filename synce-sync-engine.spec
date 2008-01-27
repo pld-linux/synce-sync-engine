@@ -16,10 +16,10 @@ Requires:	python-dbus
 Requires:	python-libxml2
 Requires:	python-libxslt
 Requires:	python-pygobject
-Requires:	python-pyrapi2 >= 0.11
-Requires:	python-pyrra >= 0.11
+Requires:	python-pyrapi2 >= %{version}
+Requires:	python-pyrra >= %{version}
 Requires:	python-pyrtfcomp >= 1.1
-Requires:	synce-odccm >= 0.11
+Requires:	synce-odccm >= %{version}
 Requires:	synce-pywbxml >= 0.1
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
