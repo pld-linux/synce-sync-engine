@@ -1,12 +1,12 @@
 Summary:	SynCE - Synchronization engine
 Summary(pl.UTF-8):	SynCE - silnik synchronizacji
 Name:		synce-sync-engine
-Version:	0.11
+Version:	0.11.1
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/synce/sync-engine-%{version}.tar.gz
-# Source0-md5:	6c8c6a0ef0e8228269b2f2c00e4c732b
+# Source0-md5:	a552f4dad3dcd284821c1247054259a0
 URL:		http://www.synce.org/
 BuildRequires:	python
 BuildRequires:	rpm-pythonprov
@@ -19,6 +19,7 @@ Requires:	python-pygobject
 Requires:	python-pyrapi2 >= %{version}
 Requires:	python-pyrra >= %{version}
 Requires:	python-pyrtfcomp >= 1.1
+Requires:	python-setuptools
 Requires:	synce-odccm >= %{version}
 Requires:	synce-pywbxml >= 0.1
 BuildArch:	noarch
@@ -74,3 +75,5 @@ rm -rf $RPM_BUILD_ROOT
 %{py_sitescriptdir}/SyncEngine/formats30/*.xsl
 %{py_sitescriptdir}/SyncEngine/formats30/tzutils/*.py[co]
 %{py_sitescriptdir}/plugins/*.py[co]
+%dir %{py_sitescriptdir}/SyncEngine/wbxml
+%{py_sitescriptdir}/SyncEngine/wbxml/*.py[co]
