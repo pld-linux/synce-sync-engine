@@ -2,7 +2,7 @@ Summary:	SynCE - Synchronization engine
 Summary(pl.UTF-8):	SynCE - silnik synchronizacji
 Name:		synce-sync-engine
 Version:	0.11.1
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/synce/sync-engine-%{version}.tar.gz
@@ -52,7 +52,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc CHANGELOG
+%doc CHANGELOG config/config.xml
 %attr(755,root,root) %{_bindir}/clean_partnerships.py
 %attr(755,root,root) %{_bindir}/configure_bindings.py
 %attr(755,root,root) %{_bindir}/create_partnership.py
