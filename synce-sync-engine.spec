@@ -1,17 +1,17 @@
 Summary:	SynCE - Synchronization engine
 Summary(pl.UTF-8):	SynCE - silnik synchronizacji
 Name:		synce-sync-engine
-Version:	0.11.1
-Release:	2
+Version:	0.12
+Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/synce/sync-engine-%{version}.tar.gz
-# Source0-md5:	a552f4dad3dcd284821c1247054259a0
+# Source0-md5:	2886545a8f7a029063b9b5f804806e23
 URL:		http://www.synce.org/
 BuildRequires:	python
 BuildRequires:	rpm-pythonprov
 BuildRequires:	sed >= 4.0
-Requires:	libopensync-plugin-python >= 0.21
+Requires:	libopensync-plugin-python >= 0.30
 Requires:	python-dbus
 Requires:	python-libxml2
 Requires:	python-libxslt
@@ -21,7 +21,7 @@ Requires:	python-pyrra >= %{version}
 Requires:	python-pyrtfcomp >= 1.1
 Requires:	python-setuptools
 Requires:	synce-odccm >= %{version}
-Requires:	synce-pywbxml >= 0.1
+#Requires:	synce-pywbxml >= 0.1
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -42,8 +42,12 @@ python setup.py build
 
 %install
 rm -rf $RPM_BUILD_ROOT
-python setup.py install \
+%{__python} setup.py install \
 	--root=$RPM_BUILD_ROOT
+
+%{__install} -D plugins/synce-opensync-plugin-3x.py $RPM_BUILD_ROOT%{_libdir}/opensync-1.0/python-plugins/synce-opensync-plugin-3x.py
+%{__install} -D config/org.synce.SyncEngine.service $RPM_BUILD_ROOT%{_datadir}/dbus-1/services/org.synce.SyncEngine.service
+%{__install} -D config/syncengine.conf.xml $RPM_BUILD_ROOT%{_sysconfdir}/syncengine.conf.xml
 
 %py_postclean
 
@@ -52,7 +56,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc CHANGELOG config/config.xml
+%doc CHANGELOG
 %attr(755,root,root) %{_bindir}/clean_partnerships.py
 %attr(755,root,root) %{_bindir}/configure_bindings.py
 %attr(755,root,root) %{_bindir}/create_partnership.py
@@ -77,3 +81,6 @@ rm -rf $RPM_BUILD_ROOT
 %{py_sitescriptdir}/plugins/*.py[co]
 %dir %{py_sitescriptdir}/SyncEngine/wbxml
 %{py_sitescriptdir}/SyncEngine/wbxml/*.py[co]
+%{_libdir}/opensync-1.0/python-plugins/synce-opensync-plugin-3x.py
+%{_datadir}/dbus-1/services/org.synce.SyncEngine.service
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/syncengine.conf.xml
