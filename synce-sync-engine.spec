@@ -11,6 +11,7 @@ URL:		http://www.synce.org/
 BuildRequires:	python
 BuildRequires:	rpm-pythonprov
 BuildRequires:	sed >= 4.0
+BuildRequires:	python-setuptools
 Requires:	libopensync-plugin-python >= 0.30
 Requires:	python-dbus
 Requires:	python-libxml2
