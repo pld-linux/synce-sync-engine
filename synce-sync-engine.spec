@@ -1,17 +1,17 @@
 Summary:	SynCE - Synchronization engine
 Summary(pl.UTF-8):	SynCE - silnik synchronizacji
 Name:		synce-sync-engine
-Version:	0.12
-Release:	4
+Version:	0.15
+Release:	1
 License:	GPL v2+
 Group:		Libraries
-Source0:	http://dl.sourceforge.net/synce/sync-engine-%{version}.tar.gz
-# Source0-md5:	2886545a8f7a029063b9b5f804806e23
+Source0:	http://downloads.sourceforge.net/project/synce/SynCE/%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	3ed81acc39e21effe765fb5f3b248d73
 URL:		http://www.synce.org/
 BuildRequires:	python
+BuildRequires:	python-setuptools
 BuildRequires:	rpm-pythonprov
 BuildRequires:	sed >= 4.0
-BuildRequires:	python-setuptools
 Requires:	libopensync-plugin-python >= 0.30
 Requires:	python-dbus
 Requires:	python-libxml2
@@ -32,7 +32,7 @@ SynCE - Synchronization engine.
 SynCE - silnik synchronizacji.
 
 %prep
-%setup -q -n sync-engine-%{version}
+%setup -q
 
 # Change python package path to normal on 'tools' folder
 sed -i -e "#sys.path.insert(0,#d" tools/*.py
@@ -45,9 +45,9 @@ rm -rf $RPM_BUILD_ROOT
 %{__python} setup.py install \
 	--root=$RPM_BUILD_ROOT
 
-%{__install} -D plugins/synce-opensync-plugin-3x.py $RPM_BUILD_ROOT%{_libdir}/opensync-1.0/python-plugins/synce-opensync-plugin-3x.py
-%{__install} -D config/org.synce.SyncEngine.service $RPM_BUILD_ROOT%{_datadir}/dbus-1/services/org.synce.SyncEngine.service
-%{__install} -D config/syncengine.conf.xml $RPM_BUILD_ROOT%{_sysconfdir}/syncengine.conf.xml
+install -D plugins/synce-opensync-plugin-3x.py $RPM_BUILD_ROOT%{_libdir}/opensync-1.0/python-plugins/synce-opensync-plugin-3x.py
+install -D config/org.synce.SyncEngine.service $RPM_BUILD_ROOT%{_datadir}/dbus-1/services/org.synce.SyncEngine.service
+install -D config/syncengine.conf.xml $RPM_BUILD_ROOT%{_sysconfdir}/syncengine.conf.xml
 
 %py_postclean
 
