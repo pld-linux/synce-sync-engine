@@ -4,7 +4,7 @@ Summary:	SynCE - Synchronization engine
 Summary(pl.UTF-8):	SynCE - silnik synchronizacji
 Name:		synce-sync-engine
 Version:	0.15
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/project/synce/SynCE/%{version}/%{name}-%{version}.tar.gz
@@ -20,8 +20,8 @@ Requires:	python-dbus
 Requires:	python-libxml2
 Requires:	python-libxslt
 Requires:	python-pygobject
-Requires:	python-pyrapi2 >= %{version}
-Requires:	python-pyrra >= %{version}
+Requires:	python-pyrapi2 >= 0.12
+Requires:	python-pyrra >= 0.12
 Requires:	python-pyrtfcomp >= 1.1
 Requires:	python-setuptools
 Requires:	synce-connector
