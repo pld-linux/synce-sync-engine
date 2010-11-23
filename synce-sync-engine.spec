@@ -4,7 +4,7 @@ Summary:	SynCE - Synchronization engine
 Summary(pl.UTF-8):	SynCE - silnik synchronizacji
 Name:		synce-sync-engine
 Version:	0.15
-Release:	2
+Release:	3
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/project/synce/SynCE/%{version}/%{name}-%{version}.tar.gz
