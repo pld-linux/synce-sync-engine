@@ -1,14 +1,15 @@
 # TODO
 # - move (to private dir) or rename .py files in bindir not to be so generic
+# - %{py_sitescriptdir}/plugins/*.py[co] are duplicate in favour of %{_datadir}/libopensync1/python-plugins?
 Summary:	SynCE - Synchronization engine
 Summary(pl.UTF-8):	SynCE - silnik synchronizacji
 Name:		synce-sync-engine
-Version:	0.15
-Release:	3
+Version:	0.15.1
+Release:	1
 License:	GPL v2+
 Group:		Libraries
-Source0:	http://downloads.sourceforge.net/project/synce/SynCE/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	3ed81acc39e21effe765fb5f3b248d73
+Source0:	http://downloads.sourceforge.net/synce/%{name}-%{version}.tar.gz
+# Source0-md5:	724c50f35cdd1fe5efb62588d19ecc52
 URL:		http://www.synce.org/
 BuildRequires:	python
 BuildRequires:	python-setuptools
@@ -19,6 +20,7 @@ Requires:	libopensync-plugin-python >= 0.30
 Requires:	python-dbus
 Requires:	python-libxml2
 Requires:	python-libxslt
+Requires:	python-opensync >= 1:0.39-7
 Requires:	python-pygobject
 Requires:	python-pyrapi2 >= 0.12
 Requires:	python-pyrra >= 0.12
@@ -41,6 +43,8 @@ SynCE - silnik synchronizacji.
 %{__sed} -i -e "#sys.path.insert(0,#d" tools/*.py
 
 %build
+CC="%{__cc}" \
+CFLAGS="%{rpmcflags}" \
 %{__python} setup.py build
 
 %install
@@ -49,7 +53,8 @@ rm -rf $RPM_BUILD_ROOT
 	--optimize=2 \
 	--root=$RPM_BUILD_ROOT
 
-install -Dp plugins/synce-opensync-plugin-3x.py $RPM_BUILD_ROOT%{_libdir}/opensync-1.0/python-plugins/synce-opensync-plugin-3x.py
+install -d $RPM_BUILD_ROOT%{_datadir}/libopensync1/python-plugins
+install -Dp plugins/synce-opensync-plugin-3x.py $RPM_BUILD_ROOT%{_datadir}/libopensync1/python-plugins
 install -Dp config/org.synce.SyncEngine.service $RPM_BUILD_ROOT%{_datadir}/dbus-1/services/org.synce.SyncEngine.service
 install -Dp config/syncengine.conf.xml $RPM_BUILD_ROOT%{_sysconfdir}/syncengine.conf.xml
 
@@ -89,5 +94,5 @@ rm -rf $RPM_BUILD_ROOT
 %{py_sitescriptdir}/plugins/*.py[co]
 %dir %{py_sitescriptdir}/SyncEngine/wbxml
 %{py_sitescriptdir}/SyncEngine/wbxml/*.py[co]
-%{_libdir}/opensync-1.0/python-plugins/synce-opensync-plugin-3x.py
+%{_datadir}/libopensync1/python-plugins/synce-opensync-plugin-3x.py
 %{_datadir}/dbus-1/services/org.synce.SyncEngine.service
